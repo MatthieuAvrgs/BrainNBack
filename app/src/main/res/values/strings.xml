@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Brain N-Back</string>
+    <color name="carre">#00FF0000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#FF0000FF</color>
+
 </resources>
