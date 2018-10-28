@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="52dp">
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+
+            android:useDefaultMargins="true"
+
+            tools:context=".GridXMLActivity"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="66dp">
+
+            <View
+                android:id="@+id/carre1"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre2"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre3"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre4"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre5"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre6"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre7"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+            <View
+                android:id="@+id/carre8"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/blue" />
+
+            <View
+                android:id="@+id/carre9"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@color/white" />
+
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
