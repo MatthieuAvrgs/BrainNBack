@@ -3,5 +3,7 @@
     <color name="carre">#00FF0000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#FF0000FF</color>
+    <color name="beige">#f0e2a8</color>
+    <color name="marron">#9a8262</color>
 
 </resources>
