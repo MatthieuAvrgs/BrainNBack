@@ -87,7 +87,7 @@
                     android:id="@+id/carre8"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:background="@color/marron" />
+                    android:background="@color/white" />
 
                 <View
                     android:id="@+id/carre9"

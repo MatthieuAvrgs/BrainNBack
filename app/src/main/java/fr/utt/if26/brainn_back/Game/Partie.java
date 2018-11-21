@@ -6,11 +6,24 @@ public class Partie {
     private int[] stat;
     private Settings settingPartie;
 
-    public Partie(int score, PetitCarre[] listeCarres, int[] stat, Settings settingPartie) {
-        this.score = score;
-        this.listeCarres = listeCarres;
-        this.stat = stat;
+    public Partie(Settings settingPartie) {
         this.settingPartie = settingPartie;
+        this.listeCarres = new PetitCarre[settingPartie.getNbreItems()];
+        for(int i=0; i<settingPartie.getNbreItems(); i++){
+            listeCarres[i]=new PetitCarre();
+        }
+    }
+
+    public PetitCarre[] getListeCarres() {
+        return listeCarres;
+    }
+
+    public void setListeCarres(PetitCarre[] listeCarres) {
+        this.listeCarres = listeCarres;
+    }
+
+    public Settings getSettingPartie() {
+        return settingPartie;
     }
 
     public void startGame(){

@@ -6,9 +6,13 @@ public class PetitCarre {
     private int position;
     private boolean[] reponses;
 
-    public PetitCarre(int position) {
+    public PetitCarre() {
         Random rand = new Random();
         this.position  = rand.nextInt(8) + 1;
         this.reponses = null;
+    }
+
+    public int getPosition() {
+        return position;
     }
 }
