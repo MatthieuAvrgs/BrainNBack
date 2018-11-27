@@ -65,6 +65,10 @@ public class GameActivity extends AppCompatActivity {
         listeVuesCarre.add(carre8);
         listeVuesCarre.add(carre9);
 
+        // int niveau = get niveau dans la bbd
+        // long temps = get temps dans la bdd
+        // int nbreItems = get nbrItems dans la bdd
+        // settingsPartie = Settings(niveau, temps, nbreItems)
         settingsPartie = new Settings();
         partie = new Partie(new Settings());
 

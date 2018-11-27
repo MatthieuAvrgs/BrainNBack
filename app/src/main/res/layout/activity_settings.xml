@@ -8,4 +8,104 @@
     android:background="@color/beige"
     tools:context=".SettingsActivity">
 
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/spinner_niveau_jeu_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="99dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="48dp"
+            android:text="Button" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="101dp"
+            android:text="Niveau" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="176dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="153dp"
+            android:layout_marginEnd="27dp"
+            android:layout_toStartOf="@+id/editText2"
+            android:text="Temps intervalle apparition" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="204dp"
+            android:text="Son" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginBottom="223dp"
+            android:text="Couleur" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="196dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/spinner_niveau_jeu_settings"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-4dp" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="134dp"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:inputType="time" />
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

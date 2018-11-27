@@ -10,7 +10,7 @@ public class Partie {
         this.settingPartie = settingPartie;
         this.listeCarres = new PetitCarre[settingPartie.getNbreItems()];
         for(int i=0; i<settingPartie.getNbreItems(); i++){
-            listeCarres[i]=new PetitCarre();
+            listeCarres[i]=new PetitCarre(this.listeCarres, settingPartie.getNiveau());
         }
     }
 

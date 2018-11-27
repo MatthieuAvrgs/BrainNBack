@@ -5,8 +5,10 @@
         android:id="@+id/parametres"
         android:title="Paramètres">
     </item>
+    <!--
     <item
         android:id="@+id/a_propos"
         android:title="Règles">
     </item>
+    -->
 </menu>
