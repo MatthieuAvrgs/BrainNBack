@@ -20,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent secondeActivite = new Intent(MainActivity.this, GameActivity.class);
-        startActivity(secondeActivite);
-
         //bouton qui permet de commencer le jeu
         Button btn = (Button)findViewById(R.id.bouton_commencer_jeu);
         btn.setOnClickListener(new View.OnClickListener() {
