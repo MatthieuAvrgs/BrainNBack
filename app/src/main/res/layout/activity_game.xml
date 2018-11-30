@@ -109,7 +109,7 @@
             tools:layout_editor_absoluteY="357dp">
 
             <Button
-                android:id="@+id/son"
+                android:id="@+id/boutonSon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -117,7 +117,7 @@
                 android:text="Son" />
 
             <Button
-                android:id="@+id/position"
+                android:id="@+id/boutonPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

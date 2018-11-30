@@ -40,4 +40,12 @@ public class PetitCarre {
             return positionCarre;
         }
     }
+
+    public void setReponses (boolean[] tableauReponses){
+        this.reponses=tableauReponses;
+    }
+
+    public boolean[] getReponses (){
+        return this.reponses;
+    }
 }
