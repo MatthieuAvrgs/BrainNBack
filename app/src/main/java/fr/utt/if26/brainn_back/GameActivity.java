@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -64,6 +66,9 @@ public class GameActivity extends AppCompatActivity {
         listeVuesCarre.add(carre7);
         listeVuesCarre.add(carre8);
         listeVuesCarre.add(carre9);
+        final Button boutonSon;
+        final Button boutonPosition;
+
 
         // int niveau = get niveau dans la bbd
         // long temps = get temps dans la bdd
@@ -82,11 +87,36 @@ public class GameActivity extends AppCompatActivity {
             }
         };
 
+        boutonSon = findViewById(R.id.boutonSon);
+        boutonPosition = findViewById(R.id.boutonPosition);
+
+        final boolean reponses[] = new boolean[] {false, false, false};
+        //reponses[0] : position
+        //reponses[1] : son
+        //reponses[2] : couleur
+        boutonPosition.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                reponses[0]=true;
+            }
+        });
+        boutonSon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                reponses[1]=true;
+            }
+        });
+
+
         new Thread(new Runnable() {
                 public void run() {
                     try {
+                        Thread.sleep(settingsPartie.getTemps());
                         //on parcourt les petitcarres du tableau
                         for(index = 0; index<(partie.getSettingPartie().getNbreItems()); index++) {
+                            reponses[0] = false;
+                            reponses[1] = false;
+                            reponses[2] = false;
                             Message afficherCarre = mHandler.obtainMessage(1,
                                     partie.getListeCarres()[index].getPosition(), 0);
 
@@ -100,12 +130,18 @@ public class GameActivity extends AppCompatActivity {
 
                             //Temps entre 2 carrés
                             Thread.sleep(settingsPartie.getTemps());
-                            }
+
+                            //creation d'une nouvelle variable pour sauvegarder les reponses du joueur
+                            partie.getListeCarres()[index].setReponses(new boolean[]{reponses[0], reponses[1], reponses[2]});
+                        }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                    }finally{
+                        partie.calculerScore();
                     }
                 }
             }).start();
+
         }
 
 
