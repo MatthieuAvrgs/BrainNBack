@@ -41,5 +41,11 @@ public class PersistancePartie extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //ajout des parties dans la base de donnée
+    public void addPartie(int niveau, boolean couleur, boolean son,
+                          int score){
+
+    }
+
 
 }
