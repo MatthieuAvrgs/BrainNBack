@@ -3,7 +3,7 @@ package fr.utt.if26.brainn_back.Game;
 public class Settings {
     private int niveau = 2;
     private long temps = 3000;
-    private int nbreItems = 10;
+    private int nbreItems = 3;
 
     public Settings(int niveau, long temps, int nbreItems) {
         this.niveau = niveau;
