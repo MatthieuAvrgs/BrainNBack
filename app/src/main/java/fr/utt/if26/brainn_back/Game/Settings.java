@@ -4,6 +4,9 @@ public class Settings {
     private int niveau = 2;
     private long temps = 3000;
     private int nbreItems = 10;
+    private boolean couleur = false;
+    private boolean son = true;
+
 
     public Settings(int niveau, long temps, int nbreItems) {
         this.niveau = niveau;
@@ -34,5 +37,21 @@ public class Settings {
 
     public void setTemps(long temps) {
         this.temps = temps;
+    }
+
+    public boolean isCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(boolean couleur) {
+        this.couleur = couleur;
+    }
+
+    public boolean isSon() {
+        return son;
+    }
+
+    public void setSon(boolean son) {
+        this.son = son;
     }
 }

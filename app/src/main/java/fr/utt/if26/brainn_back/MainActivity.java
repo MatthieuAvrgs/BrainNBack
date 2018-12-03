@@ -29,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //bouton pour afficher l'historique
+        Button btn_historique = (Button)findViewById(R.id.bouton_afficher_historique);
+        btn_historique.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BDDScoreListe.class));
+            }
+        });
+
         //get the spinner
         Spinner dropdown = findViewById(R.id.spinner_niveau_jeu);
         String[] items = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
