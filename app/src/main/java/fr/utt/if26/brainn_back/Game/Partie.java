@@ -102,6 +102,7 @@ public class Partie {
         return 0;
     }
 
+    public Map <String,Statistique> getStatistiquesPartie() { return this.statistiquesPartie; }
     public int getScorePoint(){
         return this.scorePoint;
     }
