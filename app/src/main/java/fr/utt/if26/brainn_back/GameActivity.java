@@ -169,7 +169,7 @@ public class GameActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .create();
-        alertDialog.setTitle("Score : "+score);
+        alertDialog.setTitle("Score : "+score+"%");
         alertDialog.setMessage("AlertDialog message");
         //alertDialog.setView(view);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rejouer",
@@ -184,7 +184,8 @@ public class GameActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        //startActivity(new Intent(MainActivity.this, GameActivity.class));
+                        Intent mainActivity = new Intent (GameActivity.this, MainActivity.class);
+                        startActivity(mainActivity);
                         dialog.dismiss();
                     }
                 });

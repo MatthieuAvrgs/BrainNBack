@@ -49,14 +49,16 @@ public class Partie {
         int totalOublies=0;
         while (it.hasNext()) {
             Map.Entry<String,Statistique> pair = it.next();
-            System.out.println("getBonnesReponses : "+ pair.getValue().getBonnesReponses());
-            System.out.println("getMauvaisesReponses : "+ pair.getValue().getMauvaisesReponses());
-            System.out.println("getOublies : "+ pair.getValue().getOublies());
             totalBonnesReponses += pair.getValue().getBonnesReponses();
             totalMauvaisesReponses += pair.getValue().getMauvaisesReponses();
             totalOublies += pair.getValue().getOublies();
         }
-        this.scorePoint = totalBonnesReponses*2+totalMauvaisesReponses*(-1);
+        int denominateur=(totalBonnesReponses+totalOublies)*2;
+        denominateur=denominateur==0?1:denominateur;
+        this.scorePoint = (totalBonnesReponses*2-totalMauvaisesReponses)*100/(denominateur);
+        if(this.scorePoint<0){
+            this.scorePoint=0;
+        }
     }
 
     private void obtenirStatistiquesPartie(){
@@ -85,17 +87,17 @@ public class Partie {
         }
     }
 
-    private int traiterReponseJoueur(int positionCarreEnCours, int positionNCarreAvant, boolean reponseJoueur){
+    private int traiterReponseJoueur(int infoCarreEnCours, int infoNCarreAvant, boolean reponseJoueur){
         //bonne réponse on retourne 1
-        if(positionCarreEnCours==positionNCarreAvant && reponseJoueur == true){
+        if(infoCarreEnCours==infoNCarreAvant && reponseJoueur == true){
             return 1;
         }
         //il a oublié de cliquer on retourne 2
-        else if(positionCarreEnCours==positionNCarreAvant && reponseJoueur == false){
+        else if(infoCarreEnCours==infoNCarreAvant && reponseJoueur == false){
             return 2;
         }
         //si joueur a appuyer et il ne le fallait pas on retourne 3
-        else if (positionCarreEnCours!=positionNCarreAvant && reponseJoueur == true){
+        else if (infoCarreEnCours!=infoNCarreAvant && reponseJoueur == true){
             return 3;
         }
         //cas par defaut
