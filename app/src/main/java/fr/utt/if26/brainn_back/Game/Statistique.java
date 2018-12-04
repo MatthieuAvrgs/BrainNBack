@@ -1,6 +1,7 @@
 package fr.utt.if26.brainn_back.Game;
 
 public class Statistique {
+    private String titre;
     private int bonnesReponses;
     private int mauvaisesReponses;
     private int oublies;
@@ -30,6 +31,14 @@ public class Statistique {
             default:
                 break;
         }
+    }
+
+    public void setTitre(String titre){
+        this.titre=titre;
+    }
+
+    public String getTitre(){
+        return this.titre;
     }
 
     public int getBonnesReponses(){

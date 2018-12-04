@@ -4,15 +4,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -146,7 +152,7 @@ public class GameActivity extends AppCompatActivity {
                     partie.calculerScore();
                     //quand les carrés ont été affichés, on affiche la pop up de fin de partie
                     Message openDialog = mHandler.obtainMessage(3,
-                            partie.getScorePoint(), 0);
+                           partie.getScorePoint(), 0);
                     //envoie message d'afficher le carre dans le Thread UI
                     mHandler.sendMessage(openDialog);
                 } catch (InterruptedException e) {
@@ -160,36 +166,38 @@ public class GameActivity extends AppCompatActivity {
 
 //Map<String,Statistique> statistiques
     private void afficherDialogue(int score){
-        /*final Dialog dialog = new Dialog(this); // Context, this, etc.
-        dialog.setContentView(R.layout.dialog_score);
-        dialog.setTitle("aaaa");
-        dialog.show();*/
-        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //View view = inflater.inflate(R.layout.dialog_score, null);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .create();
-        alertDialog.setTitle("Score : "+score+"%");
-        alertDialog.setMessage("AlertDialog message");
-        //alertDialog.setView(view);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rejouer",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        startActivity(new Intent(GameActivity.this, GameActivity.class));
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Menu",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
+
+        List <Statistique> productList = this.partie.getStatistiquesPartie();
+        LayoutInflater dialogInflater = LayoutInflater.from(this);
+        final View allListsView = dialogInflater.inflate(R.layout.dialog_score, null);
+        //changement du titre
+        TextView titreDialog = (TextView) allListsView.findViewById(R.id.dialog_titre);
+        String sourceString = "<b>Score : " + score +"%</b> ";
+        titreDialog.setText(Html.fromHtml(sourceString));
+
+        //listView
+        ListView lview = (ListView) allListsView.findViewById(R.id.stats_list_view);
+        StatistiquesAdapter adapter = new StatistiquesAdapter(this, productList);
+        lview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        AlertDialog.Builder listsDialog = new AlertDialog.Builder(this);
+        listsDialog.setView(allListsView);
+        listsDialog.setCancelable(false)
+                .setNegativeButton("Menu", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         Intent mainActivity = new Intent (GameActivity.this, MainActivity.class);
                         startActivity(mainActivity);
                         dialog.dismiss();
                     }
-                });
-        alertDialog.show();
+                }).setPositiveButton("Rejouer", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                startActivity(new Intent(GameActivity.this, GameActivity.class));
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertD = listsDialog.create();
+        alertD.show();
     }
 
 

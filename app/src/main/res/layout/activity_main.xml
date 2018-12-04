@@ -16,26 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
-            android:id="@+id/bouton_afficher_historique"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="156dp"
-            android:layout_marginBottom="69dp"
-            android:text="Historique" />
-
-        <Button
-            android:id="@+id/bouton_commencer_jeu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="154dp"
-            android:layout_marginBottom="149dp"
-            android:text="Commencer" />
-
         <Spinner
             android:id="@+id/spinner_niveau_jeu"
             android:layout_width="wrap_content"
@@ -54,5 +34,31 @@
             android:layout_marginTop="107dp"
             android:layout_marginEnd="223dp"
             android:text="Niveau" />
+
+
+        <Button
+            android:id="@+id/bouton_commencer_jeu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="163dp"
+            android:layout_marginTop="390dp"
+            android:layout_marginEnd="73dp"
+            android:layout_marginBottom="141dp"
+            android:text="Démarrer partie" />
+
+        <Button
+            android:id="@+id/bouton_afficher_historique"
+            android:layout_width="135dp"
+            android:layout_height="41dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="326dp"
+            android:layout_marginEnd="112dp"
+            android:layout_marginBottom="69dp"
+            android:text="Historique" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

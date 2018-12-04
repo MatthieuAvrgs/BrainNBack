@@ -3,11 +3,12 @@ package fr.utt.if26.brainn_back.Game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Partie {
     private int scorePoint;
-    private Map <String,Statistique> statistiquesPartie;
+    private ArrayList <Statistique> statistiquesPartie;
     private ArrayList<int[]> statistiques;
     private PetitCarre[] listeCarres;
     private Settings settingPartie;
@@ -18,7 +19,7 @@ public class Partie {
         for(int i=0; i<settingPartie.getNbreItems(); i++){
             listeCarres[i]=new PetitCarre(this.listeCarres, settingPartie.getNiveau());
         }
-        this.statistiquesPartie=new HashMap<String,Statistique>();
+        this.statistiquesPartie=new ArrayList <Statistique>();
     }
 
     public PetitCarre[] getListeCarres() {
@@ -43,15 +44,15 @@ public class Partie {
     }
 
     private void compterLesPoints(){
-        Iterator<Map.Entry<String,Statistique>> it = this.statistiquesPartie.entrySet().iterator();
+        Iterator<Statistique> it = this.statistiquesPartie.iterator();
         int totalBonnesReponses=0;
         int totalMauvaisesReponses=0;
         int totalOublies=0;
         while (it.hasNext()) {
-            Map.Entry<String,Statistique> pair = it.next();
-            totalBonnesReponses += pair.getValue().getBonnesReponses();
-            totalMauvaisesReponses += pair.getValue().getMauvaisesReponses();
-            totalOublies += pair.getValue().getOublies();
+            Statistique stat = it.next();
+            totalBonnesReponses += stat.getBonnesReponses();
+            totalMauvaisesReponses += stat.getMauvaisesReponses();
+            totalOublies += stat.getOublies();
         }
         int denominateur=(totalBonnesReponses+totalOublies)*2;
         denominateur=denominateur==0?1:denominateur;
@@ -63,9 +64,10 @@ public class Partie {
 
     private void obtenirStatistiquesPartie(){
         //initialisation de la hashmap pour les statistiques de la partie
-        this.statistiquesPartie.put("position",new Statistique());
-        this.statistiquesPartie.put("son",new Statistique());
-        this.statistiquesPartie.put("couleur",new Statistique());
+        Map <String, Statistique> localStats = new HashMap<String, Statistique>();
+        localStats.put("position",new Statistique());
+        localStats.put("son",new Statistique());
+        localStats.put("couleur",new Statistique());
 
         int niveau = this.settingPartie.getNiveau();
 
@@ -81,9 +83,15 @@ public class Partie {
                 //on donne en paramètre la position du carre actuel et celui N fois avant, on donne aussi la réponse du joueur
                 reponsePosition = this.traiterReponseJoueur(this.listeCarres[index].getPosition(),this.listeCarres[index-niveau].getPosition(),this.listeCarres[index].getReponses()[0]);
                 //on appelle une méthode de la classe Score qui permet de traiter la réponse obtenue par la méthode traiterReponseJoueur
-                this.statistiquesPartie.get("position").traiterReponseStatistique(reponsePosition);
+                localStats.get("position").traiterReponseStatistique(reponsePosition);
                 //TODO add traitement reponse pour son et couleur
             }
+        }
+        Iterator<Map.Entry<String, Statistique>> it3 = localStats.entrySet().iterator();
+        while (it3.hasNext()) {
+            Map.Entry<String, Statistique> pair = it3.next();
+            pair.getValue().setTitre(pair.getKey());
+            this.statistiquesPartie.add(pair.getValue());
         }
     }
 
@@ -104,7 +112,7 @@ public class Partie {
         return 0;
     }
 
-    public Map <String,Statistique> getStatistiquesPartie() { return this.statistiquesPartie; }
+    public List <Statistique> getStatistiquesPartie() { return this.statistiquesPartie; }
     public int getScorePoint(){
         return this.scorePoint;
     }

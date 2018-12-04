@@ -2,8 +2,8 @@ package fr.utt.if26.brainn_back.Game;
 
 public class Settings {
     private int niveau = 1;
-    private long temps = 3000;
-    private int nbreItems = 5;
+    private long temps = 2500;
+    private int nbreItems = 4;
     private boolean couleur = false;
     private boolean son = true;
 
