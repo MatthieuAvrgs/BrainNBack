@@ -38,6 +38,8 @@ import static java.lang.Thread.sleep;
 public class GameActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
 
+    private PersistancePartie bdd = new PersistancePartie(this);
+
     View carre1;
     View carre2;
     View carre3;
@@ -150,6 +152,8 @@ public class GameActivity extends AppCompatActivity {
                     }
                     //fin de la partie
                     partie.calculerScore();
+                    //save in bdd
+                    bdd.addPartie(partie);
                     //quand les carrés ont été affichés, on affiche la pop up de fin de partie
                     Message openDialog = mHandler.obtainMessage(3,
                            partie.getScorePoint(), 0);
@@ -166,8 +170,6 @@ public class GameActivity extends AppCompatActivity {
 
 //Map<String,Statistique> statistiques
     private void afficherDialogue(int score){
-
-
         List <Statistique> productList = this.partie.getStatistiquesPartie();
         LayoutInflater dialogInflater = LayoutInflater.from(this);
         final View allListsView = dialogInflater.inflate(R.layout.dialog_score, null);

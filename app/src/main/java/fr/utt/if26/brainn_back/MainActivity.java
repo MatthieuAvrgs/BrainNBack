@@ -1,6 +1,7 @@
 package fr.utt.if26.brainn_back;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,20 +10,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
 /* test message */
+    private PersistancePartie bdd = new PersistancePartie(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView meilleurScore = (TextView) findViewById(R.id.meilleur_score);
+        TextView meilleurNiveau = (TextView) findViewById(R.id.meilleur_niveau);
+        TextView nbParties = (TextView) findViewById(R.id.nb_parties);
+
+        meilleurScore.setText(String.valueOf(bdd.getMeilleurScore())+"%");
+        meilleurNiveau.setText(String.valueOf(bdd.getMeilleurNiveau()));
+        nbParties.setText(String.valueOf(bdd.getNombrePartiesJouees()));
+
+
         //bouton qui permet de commencer le jeu
-        Button btn = (Button)findViewById(R.id.bouton_commencer_jeu);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btn_commencer_jeu = (Button)findViewById(R.id.bouton_commencer_jeu);
+
+        btn_commencer_jeu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, GameActivity.class));
