@@ -15,10 +15,12 @@ public class Settings {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(c);
         boolean isSon = SP.getBoolean("son", false);
         boolean isCouleur = SP.getBoolean("couleur",false);
-        String niveauS = SP.getString("niveau","null");
-        String tempsS = SP.getString("temps","null");
+        String niveauS = SP.getString("niveau","1");
+        String tempsS = SP.getString("temps","2000");
+        String nbCarres = SP.getString("nbCarres","10");
         this.niveau = Integer.parseInt(niveauS);
         this.temps = Integer.parseInt(tempsS);
+        this.nbreItems = Integer.parseInt(nbCarres);
         this.couleur = isCouleur;
         this.son = isSon;
     }

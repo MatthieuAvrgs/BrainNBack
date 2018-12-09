@@ -32,4 +32,11 @@
         <item><String>8</String></item>
         <item><String>9</String></item>
     </array>
+    <array name="nbCarres">
+        <item><String>10</String></item>
+        <item><String>15</String></item>
+        <item><String>20</String></item>
+        <item><String>25</String></item>
+        <item><String>30</String></item>
+    </array>
 </resources>
