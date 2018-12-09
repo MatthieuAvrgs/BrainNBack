@@ -1,5 +1,9 @@
 package fr.utt.if26.brainn_back.Game;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 public class Settings {
     private int niveau = 1;
     private long temps = 2500;
@@ -7,10 +11,16 @@ public class Settings {
     private boolean couleur = false;
     private boolean son = true;
 
-    public Settings(int niveau, long temps, int nbreItems) {
-        this.niveau = niveau;
-        this.temps = temps;
-        this.nbreItems = nbreItems;
+    public Settings(Context c) {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(c);
+        boolean isSon = SP.getBoolean("son", false);
+        boolean isCouleur = SP.getBoolean("couleur",false);
+        String niveauS = SP.getString("niveau","null");
+        String tempsS = SP.getString("temps","null");
+        this.niveau = Integer.parseInt(niveauS);
+        this.temps = Integer.parseInt(tempsS);
+        this.couleur = isCouleur;
+        this.son = isSon;
     }
 
     public Settings() {

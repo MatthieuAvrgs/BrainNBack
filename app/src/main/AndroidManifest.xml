@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".GameActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".BDDScoreListe"></activity>
+        <activity android:name=".BDDScoreListe" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

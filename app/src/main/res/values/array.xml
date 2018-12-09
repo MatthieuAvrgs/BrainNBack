@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="liste_temps">
+        <item>1000 ms</item>
+        <item>2000 ms</item>
+        <item>3000 ms</item>
+    </array>
+    <array name="liste_temps_values">
+        <item><String>1000</String></item>
+        <item><String>2000</String></item>
+        <item><String>3000</String></item>
+    </array>
+    <array name="niveau">
+        <item><String>1</String></item>
+        <item><String>2</String></item>
+        <item><String>3</String></item>
+        <item><String>4</String></item>
+        <item><String>5</String></item>
+        <item><String>6</String></item>
+        <item><String>7</String></item>
+        <item><String>8</String></item>
+        <item><String>9</String></item>
+    </array>
+    <array name="niveau_values">
+        <item><String>1</String></item>
+        <item><String>2</String></item>
+        <item><String>3</String></item>
+        <item><String>4</String></item>
+        <item><String>5</String></item>
+        <item><String>6</String></item>
+        <item><String>7</String></item>
+        <item><String>8</String></item>
+        <item><String>9</String></item>
+    </array>
+</resources>

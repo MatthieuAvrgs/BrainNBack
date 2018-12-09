@@ -90,8 +90,8 @@ public class GameActivity extends AppCompatActivity {
         // long temps = get temps dans la bdd
         // int nbreItems = get nbrItems dans la bdd
         // settingsPartie = Settings(niveau, temps, nbreItems)
-        settingsPartie = new Settings();
-        partie = new Partie(new Settings());
+        settingsPartie = new Settings(this);
+        partie = new Partie(settingsPartie);
 
         //timing
         final  Handler mHandler = new Handler(){

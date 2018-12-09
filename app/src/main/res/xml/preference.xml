@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <CheckBoxPreference
+        android:title="Son"
+        android:defaultValue="false"
+        android:summary="Cette option active le mode son du jeu"
+        android:key="son" />
+    <CheckBoxPreference
+        android:title="Couleur"
+        android:defaultValue="false"
+        android:summary="Avec cettte option, if faudra aussi mémoriser les couleurs"
+        android:key="couleur" />
+
+    <ListPreference
+        android:key="temps"
+        android:summary="%s"
+        android:dialogTitle="Choisissez le temps entre 2 carrés"
+        android:entries="@array/liste_temps"
+        android:entryValues="@array/liste_temps_values"
+        android:title="Temps entre 2 carrés"
+        android:defaultValue="1000"/>
+
+    <ListPreference
+        android:key="niveau"
+        android:summary="%s"
+        android:dialogTitle="Niveau"
+        android:entries="@array/niveau"
+        android:entryValues="@array/niveau_values"
+        android:title="Choix niveau"
+        android:defaultValue="1"/>
+
+</PreferenceScreen>
