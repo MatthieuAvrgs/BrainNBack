@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,7 +37,9 @@ import fr.utt.if26.brainn_back.Game.Statistique;
 
 import static java.lang.Thread.sleep;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements
+        TextToSpeech.OnInitListener
+{
     AlertDialog.Builder builder;
 
     private PersistancePartie bdd = new PersistancePartie(this);
@@ -55,6 +59,8 @@ public class GameActivity extends AppCompatActivity {
     Partie partie;
     List<View> listeVuesCarre;
     int index;
+
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,21 @@ public class GameActivity extends AppCompatActivity {
         boutonSon = findViewById(R.id.boutonSon);
         boutonPosition = findViewById(R.id.boutonPosition);
 
+
+
+        TextToSpeech.OnInitListener ttsListener =
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int status) {
+                        if (status==TextToSpeech.SUCCESS){
+                            tts.setLanguage(Locale.getDefault());
+                        }
+
+                    }
+                };
+         tts = new TextToSpeech(this, ttsListener);
+
+
         final boolean reponses[] = new boolean[] {false, false, false};
         //reponses[0] : position
         //reponses[1] : son
@@ -114,7 +135,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 reponses[0]=true;
-            }
+                }
         });
         boutonSon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -134,10 +155,11 @@ public class GameActivity extends AppCompatActivity {
                         reponses[1] = false;
                         reponses[2] = false;
                         Message afficherCarre = mHandler.obtainMessage(1,
-                                partie.getListeCarres()[index].getPosition(), 0);
-
+                                partie.getListeCarres()[index].getPosition(),0);
                         //envoie message d'afficher le carre dans le Thread UI
                         mHandler.sendMessage(afficherCarre);
+                        tts.speak(partie.getListeCarres()[index].getSon(), TextToSpeech.QUEUE_FLUSH, null);
+
 
                         Message desafficherCarre = mHandler.obtainMessage(2,
                                 partie.getListeCarres()[index].getPosition(), 0);
@@ -215,5 +237,10 @@ public class GameActivity extends AppCompatActivity {
         else  if(msg.what==3){
             afficherDialogue(msg.arg1);
         }
+    }
+
+    @Override
+    public void onInit(int status) {
+
     }
 }

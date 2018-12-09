@@ -2,6 +2,7 @@ package fr.utt.if26.brainn_back;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,11 +16,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity {
 /* test message */
     private PersistancePartie bdd = new PersistancePartie(this);
-
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         btn_commencer_jeu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, GameActivity.class));
+                Intent intent = new Intent(getBaseContext(), GameActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -61,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
         // set niveau settings avec cette valeur dropdown.getSelectedItem().toString();
+
+
     }
 
 
