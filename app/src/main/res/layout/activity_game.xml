@@ -107,6 +107,13 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="357dp">
+            <Button
+                android:id="@+id/boutonPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Position" />
 
             <Button
                 android:id="@+id/boutonSon"
@@ -117,36 +124,17 @@
                 android:text="Son" />
 
             <Button
-                android:id="@+id/boutonPosition"
+                android:id="@+id/boutonCouleur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Position" />
+                android:text="Couleur" />
+
+
         </LinearLayout>
 
     </LinearLayout>
 
-    <!--<LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="149dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="354dp">
-
-        <Button
-            android:id="@+id/audio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Audio" />
-
-        <Button
-            android:id="@+id/position"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Position" />
-    </LinearLayout>-->
 
 </android.support.constraint.ConstraintLayout>

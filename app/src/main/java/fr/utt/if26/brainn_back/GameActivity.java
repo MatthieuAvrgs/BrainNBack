@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -58,7 +59,8 @@ public class GameActivity extends AppCompatActivity implements
     Settings settingsPartie;
     Partie partie;
     List<View> listeVuesCarre;
-    int index;
+    private Map <Integer,String> sonMap;
+    private Map <Integer,Integer> couleurMap;
 
     private TextToSpeech tts;
 
@@ -91,13 +93,36 @@ public class GameActivity extends AppCompatActivity implements
         listeVuesCarre.add(carre9);
         final Button boutonSon;
         final Button boutonPosition;
+        final Button boutonCouleur;
 
-        // int niveau = get niveau dans la bbd
-        // long temps = get temps dans la bdd
-        // int nbreItems = get nbrItems dans la bdd
-        // settingsPartie = Settings(niveau, temps, nbreItems)
         settingsPartie = new Settings(this);
         partie = new Partie(settingsPartie);
+
+        boutonSon = findViewById(R.id.boutonSon);
+        boutonPosition = findViewById(R.id.boutonPosition);
+        boutonCouleur = findViewById(R.id.boutonCouleur);
+
+        sonMap = new HashMap <Integer,String> ();
+        sonMap.put(1,"a");
+        sonMap.put(2,"b");
+        sonMap.put(3,"c");
+        sonMap.put(4,"d");
+        sonMap.put(5,"e");
+        sonMap.put(6,"f");
+        sonMap.put(7,"g");
+        sonMap.put(8,"h");
+        sonMap.put(9,"i");
+
+        couleurMap = new HashMap <Integer,Integer> ();
+        couleurMap.put(1,R.color.marron); //marron
+        couleurMap.put(2,R.color.beigeFonce); //beige foncé
+        couleurMap.put(3,R.color.bleuFonce); //bleu foncé
+        couleurMap.put(4,R.color.rouge); //rouge
+        couleurMap.put(5,R.color.fushia); //fushia
+        couleurMap.put(6,R.color.bleuCiel); //bleu ciel
+        couleurMap.put(7,R.color.vertPomme); //vert pomme
+        couleurMap.put(8,R.color.orange); //orange
+        couleurMap.put(9,R.color.jaune); //jaune
 
         //timing
         final  Handler mHandler = new Handler(){
@@ -108,11 +133,6 @@ public class GameActivity extends AppCompatActivity implements
                 updateEcran(msg);
             }
         };
-
-        boutonSon = findViewById(R.id.boutonSon);
-        boutonPosition = findViewById(R.id.boutonPosition);
-
-
 
         TextToSpeech.OnInitListener ttsListener =
                 new TextToSpeech.OnInitListener() {
@@ -128,25 +148,44 @@ public class GameActivity extends AppCompatActivity implements
 
 
         final boolean reponses[] = new boolean[] {false, false, false};
-        //reponses[0] : position
-        //reponses[1] : son
-        //reponses[2] : couleur
+
+
         boutonPosition.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 reponses[0]=true;
                 }
         });
-        boutonSon.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                reponses[1]=true;
-            }
-        });
+
+        if (settingsPartie.isSon()==true){
+            boutonSon.setVisibility(View.VISIBLE);
+            boutonSon.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Code here executes on main thread after user presses button
+                    reponses[1]=true;
+                }
+            });
+        }else{
+            boutonSon.setVisibility(View.GONE);
+        }
+
+        if (settingsPartie.isCouleur()==true){
+            boutonCouleur.setVisibility(View.VISIBLE);
+            boutonCouleur.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Code here executes on main thread after user presses button
+                    reponses[2]=true;
+                }
+            });
+        }else{
+            boutonCouleur.setVisibility(View.GONE);
+        }
+
 
 
         Thread moteurJeu = new Thread(new Runnable() {
             public void run(){
+                int couleurCarre = R.color.marron;
                 try {
                     Thread.sleep(2000);
                     //on parcourt les petitcarres du tableau
@@ -154,11 +193,15 @@ public class GameActivity extends AppCompatActivity implements
                         reponses[0] = false;
                         reponses[1] = false;
                         reponses[2] = false;
+
+                        if (partie.getSettingPartie().isCouleur()==true){
+                            couleurCarre = couleurMap.get(partie.getListeCarres()[index].getCouleur());
+                        }
                         Message afficherCarre = mHandler.obtainMessage(1,
-                                partie.getListeCarres()[index].getPosition(),0);
+                                partie.getListeCarres()[index].getPosition(),couleurCarre);
                         //envoie message d'afficher le carre dans le Thread UI
                         mHandler.sendMessage(afficherCarre);
-                        tts.speak(partie.getListeCarres()[index].getSon(), TextToSpeech.QUEUE_FLUSH, null);
+                        tts.speak(sonMap.get(partie.getListeCarres()[index].getSon()), TextToSpeech.QUEUE_FLUSH, null);
 
 
                         Message desafficherCarre = mHandler.obtainMessage(2,
@@ -228,7 +271,7 @@ public class GameActivity extends AppCompatActivity implements
     public void updateEcran(Message msg) {
         //cas 1 : affichage du carre
         if(msg.what==1){
-            listeVuesCarre.get(msg.arg1).setBackgroundColor(getResources().getColor(R.color.marron));
+             listeVuesCarre.get(msg.arg1).setBackgroundColor(getResources().getColor(msg.arg2));
         }
         //cas 2 : desaffichage
         else  if(msg.what==2){

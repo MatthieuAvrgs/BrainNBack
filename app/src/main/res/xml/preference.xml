@@ -16,28 +16,22 @@
 
     <ListPreference
         android:key="temps"
-        android:summary="%s"
         android:dialogTitle="Choisissez le temps entre 2 carrés"
         android:entries="@array/liste_temps"
-        android:entryValues="@array/liste_temps_values"
         android:title="Temps entre 2 carrés"
         android:defaultValue="1000"/>
 
     <ListPreference
         android:key="niveau"
-        android:summary="%s"
         android:dialogTitle="Niveau"
         android:entries="@array/niveau"
-        android:entryValues="@array/niveau_values"
         android:title="Choix niveau"
         android:defaultValue="1"/>
 
     <ListPreference
         android:key="nbCarres"
-        android:summary="%s"
         android:dialogTitle="Nombre d'items"
         android:entries="@array/nbCarres"
-        android:entryValues="@array/nbCarres"
         android:title="Nombre d'items à afficher"
         android:defaultValue="1"/>
 

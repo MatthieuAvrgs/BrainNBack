@@ -7,21 +7,15 @@ import java.util.Random;
 
 public class PetitCarre {
     private int position;
-    private String son;
+    private int son;
+    private int couleur;
     private boolean[] reponses;
     private String[]lettres;
 
-    public String getSon() {
-        return son;
-    }
-
-    public void setSon(String son) {
-        this.son = son;
-    }
-
     public PetitCarre(PetitCarre[] listeCarres, int niveau) {
-        this.position  = randomPosition(listeCarres, niveau);
-        this.son = randomSon();
+        this.position  = randomIndex(listeCarres, niveau, "position");
+        this.son = randomIndex(listeCarres, niveau, "son");
+        this.couleur = randomIndex(listeCarres, niveau, "couleur");
         this.reponses = null;
     }
 
@@ -29,14 +23,8 @@ public class PetitCarre {
         return position;
     }
 
-    public String randomSon(){
-        lettres = new String[]{"a","b","c","d","e","f","g","h","i"};
-        Random rand = new Random();
-        int nombre = rand.nextInt(8) + 1;
-        return lettres[nombre];
-    }
 
-    public int randomPosition (PetitCarre[] listeCarres, int niveau){
+    public int randomIndex (PetitCarre[] listeCarres, int niveau, String caseToGet){
         Random rand = new Random();
         int positionCarre;
 
@@ -52,7 +40,16 @@ public class PetitCarre {
             int proba = rand.nextInt(chance-1) + 1;
             switch (proba){
                 case 1:
-                    return listeCarres[nbElements-niveau].getPosition();
+                    switch (caseToGet){
+                        case "position":
+                            return getNPosition(listeCarres, nbElements, niveau);
+                        case "son":
+                            return getNSon(listeCarres, nbElements, niveau);
+                        case "couleur":
+                            return getNCouleur(listeCarres, nbElements, niveau);
+                        default:
+                            return getNPosition(listeCarres, nbElements, niveau);
+                    }
                 default:
                     return rand.nextInt(8) + 1;
             }
@@ -60,6 +57,32 @@ public class PetitCarre {
             positionCarre = rand.nextInt(8) + 1;
             return positionCarre;
         }
+    }
+
+    public int getNPosition(PetitCarre[] listeCarres, int nbElements, int niveau){
+        return listeCarres[nbElements-niveau].getPosition();
+    }
+    public int getNSon(PetitCarre[] listeCarres, int nbElements, int niveau){
+        return listeCarres[nbElements-niveau].getSon();
+    }
+    public int getNCouleur(PetitCarre[] listeCarres, int nbElements, int niveau){
+        return listeCarres[nbElements-niveau].getCouleur();
+    }
+
+    public int getSon() {
+        return son;
+    }
+
+    public void setSon(int son) {
+        this.son = son;
+    }
+
+    public int getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(int couleur) {
+        this.couleur = son;
     }
 
     public void setReponses (boolean[] tableauReponses){

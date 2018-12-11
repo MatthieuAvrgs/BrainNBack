@@ -7,6 +7,16 @@
     <color name="beige">#f0e2a8</color>
     <color name="marron">#9a8262</color>
 
+    <color name="beigeFonce">#A7A37E</color>
+    <color name="bleuFonce">#046380</color>
+    <color name="rouge">#C03000</color>
+    <color name="fushia">#FF358B</color>
+    <color name="bleuCiel">#01B0F0</color>
+    <color name="vertPomme">#AEEE00</color>
+    <color name="orange">#FFA500</color>
+    <color name="jaune">#FFFF00</color>
+
+
 
 
 </resources>

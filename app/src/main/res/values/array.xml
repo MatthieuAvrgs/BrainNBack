@@ -5,38 +5,38 @@
         <item>2000 ms</item>
         <item>3000 ms</item>
     </array>
-    <array name="liste_temps_values">
-        <item><String>1000</String></item>
-        <item><String>2000</String></item>
-        <item><String>3000</String></item>
-    </array>
-    <array name="niveau">
-        <item><String>1</String></item>
-        <item><String>2</String></item>
-        <item><String>3</String></item>
-        <item><String>4</String></item>
-        <item><String>5</String></item>
-        <item><String>6</String></item>
-        <item><String>7</String></item>
-        <item><String>8</String></item>
-        <item><String>9</String></item>
-    </array>
-    <array name="niveau_values">
-        <item><String>1</String></item>
-        <item><String>2</String></item>
-        <item><String>3</String></item>
-        <item><String>4</String></item>
-        <item><String>5</String></item>
-        <item><String>6</String></item>
-        <item><String>7</String></item>
-        <item><String>8</String></item>
-        <item><String>9</String></item>
-    </array>
-    <array name="nbCarres">
-        <item><String>10</String></item>
-        <item><String>15</String></item>
-        <item><String>20</String></item>
-        <item><String>25</String></item>
-        <item><String>30</String></item>
-    </array>
+    <string-array name="liste_temps_values">
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+    <string-array name="niveau">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="niveau_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="nbCarres">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
 </resources>

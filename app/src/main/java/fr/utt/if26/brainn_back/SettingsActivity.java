@@ -35,7 +35,6 @@ public class SettingsActivity extends PreferenceActivity {
         SharedPreferences.Editor prefs = PreferenceManager.getDefaultSharedPreferences(this).edit();
         prefs.putBoolean("son",isSon);
         prefs.putBoolean("couleur",isCouleur);
-        //prefs.putStringSet("niveau",niveau);
         prefs.commit();
     }
 
