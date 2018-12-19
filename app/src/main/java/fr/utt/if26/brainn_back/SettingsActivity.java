@@ -28,14 +28,14 @@ public class SettingsActivity extends PreferenceActivity {
         String nbCarres = SP.getString("nbCarres","10");
         boolean isSon = SP.getBoolean("son", false);
         boolean isCouleur = SP.getBoolean("couleur",false);
-        int niveau = Integer.parseInt(niveauS);
-        int temps = Integer.parseInt(tempsS);
-        int nbreItems = Integer.parseInt(nbCarres);
+        //int niveau = Integer.parseInt(niveauS);
+        //int temps = Integer.parseInt(tempsS);
+        //int nbreItems = Integer.parseInt(nbCarres);
 
-        SharedPreferences.Editor prefs = PreferenceManager.getDefaultSharedPreferences(this).edit();
+        /*SharedPreferences.Editor prefs = PreferenceManager.getDefaultSharedPreferences(this).edit();
         prefs.putBoolean("son",isSon);
         prefs.putBoolean("couleur",isCouleur);
-        prefs.commit();
+        //prefs.commit();*/
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment

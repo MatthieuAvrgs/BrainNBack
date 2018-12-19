@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.Locale;
 
+import fr.utt.if26.brainn_back.Game.Settings;
+
 
 public class MainActivity extends AppCompatActivity {
 /* test message */
@@ -58,16 +60,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //get the spinner
-        Spinner dropdown = findViewById(R.id.spinner_niveau_jeu);
-        String[] items = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-        //creation de l'adaptateur qui permet de savoir comment les items vont etre display
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
-        // set niveau settings avec cette valeur dropdown.getSelectedItem().toString();
-
-
+        TextView textNiveau = (TextView) findViewById(R.id.text_niveau);
+        textNiveau.setText("Niveau : "+new Settings().getNiveau());
     }
 
 
