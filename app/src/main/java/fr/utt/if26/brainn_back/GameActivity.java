@@ -231,6 +231,8 @@ public class GameActivity extends AppCompatActivity implements
             }
         });
         moteurJeu.start();
+        TextView textNiveau = (TextView) findViewById(R.id.text_niveau);
+        textNiveau.setText("Niveau : "+new Settings().getNiveau());
     }
 
 //Map<String,Statistique> statistiques

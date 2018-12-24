@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, BDDScoreListe.class));
             }
         });
-
-        TextView textNiveau = (TextView) findViewById(R.id.text_niveau);
-        textNiveau.setText("Niveau : "+new Settings().getNiveau());
     }
 
 

@@ -18,7 +18,7 @@
         android:key="temps"
         android:dialogTitle="Choisissez le temps entre 2 carrés"
         android:entries="@array/liste_temps"
-        android:entryValues="@array/liste_temps"
+        android:entryValues="@array/liste_temps_values"
         android:title="Temps entre 2 carrés"
         android:defaultValue="1000"/>
 
