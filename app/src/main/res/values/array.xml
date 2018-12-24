@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="liste_temps">
-        <item>1000 ms</item>
         <item>2000 ms</item>
         <item>3000 ms</item>
+        <item>4000 ms</item>
     </array>
     <string-array name="liste_temps_values">
-        <item>1000</item>
         <item>2000</item>
         <item>3000</item>
+        <item>4000</item>
     </string-array>
     <string-array name="niveau">
         <item>1</item>
@@ -33,6 +33,7 @@
         <item>9</item>
     </string-array>
     <string-array name="nbCarres">
+        <item>5</item>
         <item>10</item>
         <item>15</item>
         <item>20</item>

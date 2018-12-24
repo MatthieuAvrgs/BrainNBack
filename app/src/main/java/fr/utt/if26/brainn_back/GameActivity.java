@@ -1,5 +1,6 @@
 package fr.utt.if26.brainn_back;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,8 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -61,7 +64,8 @@ public class GameActivity extends AppCompatActivity implements
     List<View> listeVuesCarre;
     private Map <Integer,String> sonMap;
     private Map <Integer,Integer> couleurMap;
-
+    private Thread moteurJeu;
+    private boolean isActivityFinished;
     private TextToSpeech tts;
 
     @Override
@@ -183,47 +187,52 @@ public class GameActivity extends AppCompatActivity implements
 
 
 
-        Thread moteurJeu = new Thread(new Runnable() {
+        moteurJeu = new Thread(new Runnable() {
             public void run(){
                 int couleurCarre = R.color.marron;
                 try {
                     Thread.sleep(2000);
+                    isActivityFinished = false;
                     //on parcourt les petitcarres du tableau
                     for(int index = 0; index<(partie.getSettingPartie().getNbreItems()); index++) {
-                        reponses[0] = false;
-                        reponses[1] = false;
-                        reponses[2] = false;
+                        if(isActivityFinished == false){
+                            reponses[0] = false;
+                            reponses[1] = false;
+                            reponses[2] = false;
 
-                        if (partie.getSettingPartie().isCouleur()==true){
-                            couleurCarre = couleurMap.get(partie.getListeCarres()[index].getCouleur());
+                            if (partie.getSettingPartie().isCouleur()==true){
+                                couleurCarre = couleurMap.get(partie.getListeCarres()[index].getCouleur());
+                            }
+                            Message afficherCarre = mHandler.obtainMessage(1,
+                                    partie.getListeCarres()[index].getPosition(),couleurCarre);
+                            //envoie message d'afficher le carre dans le Thread UI
+                            mHandler.sendMessage(afficherCarre);
+                            tts.speak(sonMap.get(partie.getListeCarres()[index].getSon()), TextToSpeech.QUEUE_FLUSH, null);
+
+
+                            Message desafficherCarre = mHandler.obtainMessage(2,
+                                    partie.getListeCarres()[index].getPosition(), 0);
+                            //envoie message de désafficher ce même carre dans le thread UI après 1 seconde
+                            mHandler.sendMessageDelayed(desafficherCarre, 1000);
+
+                            //Temps entre 2 carrés
+                            Thread.sleep(settingsPartie.getTemps());
+
+                            //creation d'une nouvelle variable pour sauvegarder les reponses du joueur
+                            partie.getListeCarres()[index].setReponses(new boolean[]{reponses[0], reponses[1], reponses[2]});
                         }
-                        Message afficherCarre = mHandler.obtainMessage(1,
-                                partie.getListeCarres()[index].getPosition(),couleurCarre);
-                        //envoie message d'afficher le carre dans le Thread UI
-                        mHandler.sendMessage(afficherCarre);
-                        tts.speak(sonMap.get(partie.getListeCarres()[index].getSon()), TextToSpeech.QUEUE_FLUSH, null);
-
-
-                        Message desafficherCarre = mHandler.obtainMessage(2,
-                                partie.getListeCarres()[index].getPosition(), 0);
-                        //envoie message de désafficher ce même carre dans le thread UI après 1 seconde
-                        mHandler.sendMessageDelayed(desafficherCarre, 1000);
-
-                        //Temps entre 2 carrés
-                        Thread.sleep(settingsPartie.getTemps());
-
-                        //creation d'une nouvelle variable pour sauvegarder les reponses du joueur
-                        partie.getListeCarres()[index].setReponses(new boolean[]{reponses[0], reponses[1], reponses[2]});
                     }
-                    //fin de la partie
-                    partie.calculerScore();
-                    //save in bdd
-                    bdd.addPartie(partie);
-                    //quand les carrés ont été affichés, on affiche la pop up de fin de partie
-                    Message openDialog = mHandler.obtainMessage(3,
-                           partie.getScorePoint(), 0);
-                    //envoie message d'afficher le carre dans le Thread UI
-                    mHandler.sendMessage(openDialog);
+                    if(isActivityFinished == false){
+                        //fin de la partie
+                        partie.calculerScore();
+                        //save in bdd
+                        bdd.addPartie(partie);
+                        //quand les carrés ont été affichés, on affiche la pop up de fin de partie
+                        Message openDialog = mHandler.obtainMessage(3,
+                                partie.getScorePoint(), 0);
+                        //envoie message d'afficher le carre dans le Thread UI
+                        mHandler.sendMessage(openDialog);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -232,9 +241,20 @@ public class GameActivity extends AppCompatActivity implements
         });
         moteurJeu.start();
         TextView textNiveau = (TextView) findViewById(R.id.text_niveau);
-        textNiveau.setText("Niveau : "+new Settings().getNiveau());
+        textNiveau.setText("Niveau : "+settingsPartie.getNiveau());
     }
 
+    @Override
+    protected void onDestroy() {
+        //Close the Text to Speech Library
+        if(tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        isActivityFinished =true;
+        GameActivity.this.finish();
+        super.onDestroy();
+    }
 //Map<String,Statistique> statistiques
     private void afficherDialogue(int score){
         List <Statistique> productList = this.partie.getStatistiquesPartie();
@@ -280,7 +300,13 @@ public class GameActivity extends AppCompatActivity implements
             listeVuesCarre.get(msg.arg1).setBackgroundColor(getResources().getColor(R.color.white));
         }
         else  if(msg.what==3){
-            afficherDialogue(msg.arg1);
+            try {
+                afficherDialogue(msg.arg1);
+            }
+            catch (WindowManager.BadTokenException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
