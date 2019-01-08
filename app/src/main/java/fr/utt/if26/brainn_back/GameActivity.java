@@ -207,9 +207,9 @@ public class GameActivity extends AppCompatActivity implements
                                     partie.getListeCarres()[index].getPosition(),couleurCarre);
                             //envoie message d'afficher le carre dans le Thread UI
                             mHandler.sendMessage(afficherCarre);
-                            tts.speak(sonMap.get(partie.getListeCarres()[index].getSon()), TextToSpeech.QUEUE_FLUSH, null);
-
-
+                            if (partie.getSettingPartie().isSon()==true){
+                                tts.speak(sonMap.get(partie.getListeCarres()[index].getSon()), TextToSpeech.QUEUE_FLUSH, null);
+                            }
                             Message desafficherCarre = mHandler.obtainMessage(2,
                                     partie.getListeCarres()[index].getPosition(), 0);
                             //envoie message de désafficher ce même carre dans le thread UI après 1 seconde

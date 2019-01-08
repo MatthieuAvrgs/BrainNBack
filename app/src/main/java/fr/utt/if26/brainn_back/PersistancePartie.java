@@ -23,7 +23,7 @@ PersistancePartie extends SQLiteOpenHelper {
     public static final String ATTRIBUT_SON = "son";
     public static final String ATTRIBUT_SCORE = "score";
     public static final String TABLE_HISTORIQUE_CREATE =
-            "CREATE TABLE " + TABLE_HISTORIQUE + "(" +
+                    "CREATE TABLE " + TABLE_HISTORIQUE + "(" +
                     ATTRIBUT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     ATTRIBUT_DATE + " TEXT, " +
                     ATTRIBUT_NIVEAU + " INTEGER, " +
@@ -34,13 +34,11 @@ PersistancePartie extends SQLiteOpenHelper {
     public static final String TABLE_HISTORIQUE_DROP = "DROP TABLE IF EXISTS " + DATABASE_NAME + ";";
 
     public PersistancePartie(Context context) {
-
         super(context,DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         db.execSQL(TABLE_HISTORIQUE_CREATE);
     }
 
@@ -77,7 +75,6 @@ PersistancePartie extends SQLiteOpenHelper {
     //ajout des parties dans la base de donnée
     public void addPartie(Partie p){
         ContentValues values = new ContentValues();
-
         //remplissage du bundle
         values.put(ATTRIBUT_DATE, getDateDuJour());
         values.put(ATTRIBUT_NIVEAU, p.getSettingPartie().getNiveau());
@@ -85,12 +82,9 @@ PersistancePartie extends SQLiteOpenHelper {
                 p.getSettingPartie().isSon()));
         values.put(ATTRIBUT_COULEUR, String.valueOf(p.getSettingPartie().isCouleur()));
         values.put(ATTRIBUT_SCORE, p.getScorePoint());
-
         SQLiteDatabase db = getWritableDatabase();
-
         db.insert(TABLE_HISTORIQUE, null, values);
         db.close();
-
     }
 
     //récupérer la liste des parties
