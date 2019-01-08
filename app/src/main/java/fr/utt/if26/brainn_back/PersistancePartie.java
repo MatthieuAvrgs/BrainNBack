@@ -120,6 +120,9 @@ PersistancePartie extends SQLiteOpenHelper {
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
+        if(mMonth==0){
+            mMonth++;
+        }
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         String date = (""+mDay+"-"+mMonth+"-"+mYear);
         return date;
