@@ -6,17 +6,17 @@ import android.preference.PreferenceManager;
 
 public class Settings {
     private int niveau = 1;
-    private long temps = 2500;
-    private int nbreItems = 4;
+    private long temps = 3000;
+    private int nbreItems = 10;
     private boolean couleur = false;
-    private boolean son = true;
+    private boolean son = false;
 
     public Settings(Context c) {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(c);
         boolean isSon = SP.getBoolean("son", false);
         boolean isCouleur = SP.getBoolean("couleur",false);
         String niveauS = SP.getString("niveau","1");
-        String tempsS = SP.getString("temps","2000");
+        String tempsS = SP.getString("temps","3000");
         String nbCarres = SP.getString("nbCarres","10");
         this.niveau = Integer.parseInt(niveauS);
         this.temps = Integer.parseInt(tempsS);
